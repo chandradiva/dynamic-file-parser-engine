@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/jee 
+    http://www.springframework.org/schema/jee/spring-jee.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<jee:jndi-lookup id="dataSource" expected-type="javax.sql.DataSource" jndi-name="jdbc/NISPDS" />
+	<bean id="stubUtil" class="com.optima.oraclejdbc.utils.StubUtil" factory-method="getInstance" />
+	<bean id="housekeepingUtils" class="com.optima.oraclejdbc.utils.HousekeepingUtils" factory-method="getInstance" />
+	
+	<bean id="confProp" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath*:config.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="rsaUtil" class="com.optima.oraclejdbc.utils.RsaUtil" factory-method="getInstance" />
+</beans>
